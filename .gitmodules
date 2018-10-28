@@ -1,0 +1,6 @@
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = git@github.com:lcpz/lain.git
+[submodule "awesome/radical"]
+	path = awesome/radical
+	url = git@github.com:Elv13/radical.git
