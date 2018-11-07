@@ -75,7 +75,7 @@ local layouts =
 
 awesome_menu = {
    {"Restart", awesome.restart},
-   {"Quit", awesome.quit}
+   {"Quit", function() awesome.quit() end}
 }
 
 system_menu = {
