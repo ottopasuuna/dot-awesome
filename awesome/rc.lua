@@ -512,6 +512,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons,
+                     screen = awful.screen.preferred,
                      size_hints_honor = false }, callback = awful.client.setslave },
     { rule = {"Euro Truck Simulator 2"},
       properties = { border_width = beautiful.border_width,
@@ -520,6 +521,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      floating = false,
                      buttons = clientbuttons,
+                     screen = awful.screen.preferred,
                      size_hints_honor = false }, callback = awful.client.setslave },
 }
 -- }}}
