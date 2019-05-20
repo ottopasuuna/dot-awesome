@@ -94,6 +94,20 @@ main_menu = awful.menu.new({ items = {
 launcher = awful.widget.launcher({image = beautiful.awesome_icon, menu = main_menu })
 -- }}}
 
+-- Autostart applications{{{
+--
+autorunApps = {
+    "cadence",
+    "owncloud",
+    "ibus-daemon --xim -d"
+}
+
+for i,app in ipairs(autorunApps) do
+    awful.util.spawn(app)
+end
+
+-- }}}
+
 -- {{{ Helper functions
 local function client_menu_toggle_fn()
     local instance = nil
