@@ -308,80 +308,44 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ modkey, "Shift"   }, "Left",
-      function (c)
-        local curidx = awful.tag.getidx()
-        if curidx == 1 then
-            awful.client.movetotag(tags[client.focus.screen][#tags[client.focus.screen]])
-        else
-            awful.client.movetotag(tags[client.focus.screen][curidx - 1])
-        end
-        awful.tag.viewidx(-1)
-      end),
-    awful.key({ modkey, "Shift"   }, "Right",
-      function (c)
-        local curidx = awful.tag.getidx()
-        if curidx == #tags[client.focus.screen] then
-          awful.client.movetotag(tags[client.focus.screen][1])
-        else
-          awful.client.movetotag(tags[client.focus.screen][curidx + 1])
-        end
-        awful.tag.viewidx(1)
-      end),
+    -- Layout manipulation
+    keydoc.group("Layout manipulation"),
+    awful.key({ modkey,           }, "Left",   awful.tag.viewprev, "Previous tag"),
+    awful.key({ modkey,           }, "Right",  awful.tag.viewnext, "Next tag"),
+    -- TODO: These bindings are broken...
+    -- awful.key({ modkey, "Shift"   }, "Left",
+    --   function (c)
+    --     local curidx = awful.tag.getidx()
+    --     if curidx == 1 then
+    --         awful.client.movetotag(tags[client.focus.screen][#tags[client.focus.screen]])
+    --     else
+    --         awful.client.movetotag(tags[client.focus.screen][curidx - 1])
+    --     end
+    --     awful.tag.viewidx(-1)
+    --   end),
+    -- awful.key({ modkey, "Shift"   }, "Right",
+    --   function (c)
+    --     local curidx = awful.tag.getidx()
+    --     if curidx == #tags[client.focus.screen] then
+    --       awful.client.movetotag(tags[client.focus.screen][1])
+    --     else
+    --       awful.client.movetotag(tags[client.focus.screen][curidx + 1])
+    --     end
+    --     awful.tag.viewidx(1)
+    --   end),
 
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    awful.key({ modkey,           }, "Escape", awful.tag.history.restore, "Go to last selected tag"),
 
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
-        end),
+        end, "Next client"),
     awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
-        end),
-
-    -- Volume Control
-    awful.key({}, "XF86AudioRaiseVolume",
-        function ()
-            os.execute(string.format("amixer set %s 1%%+", volume.channel))
-            volume.notify()
-        end),
-    awful.key({}, "XF86AudioLowerVolume",
-        function ()
-            os.execute(string.format("amixer set %s 1%%-", volume.channel))
-            volume.notify()
-        end),
-    awful.key({}, "XF86AudioMute",
-        function ()
-            os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
-            volume.notify()
-        end),
-
-    --Mpd control
-    awful.key({}, "XF86AudioPlay",
-      function()
-        awful.util.spawn("mpc play")
-        end),
-    awful.key({}, "XF86AudioStop",
-      function()
-        awful.util.spawn("mpc pause")
-        end),
-    awful.key({}, "XF86AudioNext",
-      function()
-        awful.util.spawn("mpc next")
-        end),
-    awful.key({}, "XF86AudioPrev",
-      function()
-        awful.util.spawn("mpc prev")
-        end),
-
-
-    -- Layout manipulation
-	 keydoc.group("Layout manipulation"),
+        end, "Previous client"),
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end, "Swap client forward"),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end, "Swap client backward"),
     awful.key({ modkey, "Shift", "Control"   }, "j", function () awful.client.movetoscreen()    end, "Move client next screen"),
@@ -396,33 +360,72 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end, "Focus previous client"),
+    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end, "Increase main window"),
+    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end, "Decrease main window"),
+    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end, "Incrase number of masters"),
+    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end, "Decrease number of masters"),
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end, "Increase number of columns"),
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end, "Decrease number of columns"),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end, "Next layout"),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end, "Previous layout"),
+    awful.key({ modkey, "Shift" }, "n", awful.client.restore),
+
+    -- Volume Control
+    keydoc.group("Music/Audio"),
+    awful.key({}, "XF86AudioRaiseVolume",
+        function ()
+            os.execute(string.format("amixer set %s 1%%+", volume.channel))
+            volume.notify()
+        end, "Raise volume"),
+    awful.key({}, "XF86AudioLowerVolume",
+        function ()
+            os.execute(string.format("amixer set %s 1%%-", volume.channel))
+            volume.notify()
+        end, "Lower volume"),
+    awful.key({}, "XF86AudioMute",
+        function ()
+            os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
+            volume.notify()
+        end, "Mute"),
+
+    --Mpd control
+    awful.key({}, "XF86AudioPlay",
+      function()
+        awful.util.spawn("mpc play")
+      end, "Play mpd"),
+    awful.key({}, "XF86AudioStop",
+      function()
+        awful.util.spawn("mpc pause")
+      end, "Pause mpd"),
+    awful.key({}, "XF86AudioNext",
+      function()
+        awful.util.spawn("mpc next")
+      end, "Next mpd track"),
+    awful.key({}, "XF86AudioPrev",
+      function()
+        awful.util.spawn("mpc prev")
+      end, "Next mpd track"),
+
+
+
+    -- Spawn User Apps
+    keydoc.group("Spawn apps"),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_cmd) end, "Terminal"),
+    awful.key({modkey,            }, "i",   function () awful.util.spawn(inetbrowser) end, "Internet browser"),
+    awful.key({modkey,            }, "e",   function () awful.util.spawn(emailclient) end, "Email client"),
+    awful.key({modkey,            }, "f",   function () awful.util.spawn(filemanager) end, "File manager"),
 
     -- Standard program
+    keydoc.group("Awesome"),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
-    awful.key({ modkey, "Shift" }, "n", awful.client.restore),
-
-    -- Spawn User Apps
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_cmd) end),
-    awful.key({modkey,            }, "i",   function () awful.util.spawn(inetbrowser) end),
-    awful.key({modkey,            }, "e",   function () awful.util.spawn(emailclient) end),
-    awful.key({modkey,            }, "f",   function () awful.util.spawn(filemanager) end),
 
     -- show launcher menu
-    awful.key({modkey,            }, "`",   function () main_menu:show() end),
+    awful.key({modkey,            }, "`",   function () main_menu:show() end, "Show launcher menu"),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end),
+    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end, "Start prompt"),
 
     awful.key({ modkey, "Shift" }, "r",
               function ()
@@ -430,36 +433,37 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
+              end, "Lua prompt"),
 	  awful.key({ modkey, }, "F1", keydoc.display)
 )
 
 -- Client bindings
 clientkeys = awful.util.table.join(
+    keydoc.group("Client Bindings"),
     awful.key({ modkey, "Shift"   }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
-        end),
-    awful.key({ modkey,           }, "w",      function (c) c:kill()                         end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ modkey, "Shift" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop            end),
+        end, "Toggle fullscreen"),
+    awful.key({ modkey,           }, "w",      function (c) c:kill()                         end, "Close window"),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle, "Toggle floating mode"),
+    awful.key({ modkey, "Shift" }, "Return", function (c) c:swap(awful.client.getmaster()) end, "Swap with master"),
+    awful.key({ modkey, "Shift"   }, "t",      function (c) c.ontop = not c.ontop            end, "Toggle on top mode"),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
-        end),
+        end, "Minimize"),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
-        end),
+        end, "Maximize"),
     awful.key({ modkey,  "Shift"  }, "m",
         function (c)
             c.maximized_horizontal = false
             c.maximized_vertical   = false
-        end)
+        end, "Unmaximize")
 )
 
 -- Bind all key numbers to tags.
