@@ -414,6 +414,7 @@ globalkeys = awful.util.table.join(
     awful.key({modkey,            }, "i",   function () awful.util.spawn(inetbrowser) end, "Internet browser"),
     awful.key({modkey,            }, "e",   function () awful.util.spawn(emailclient) end, "Email client"),
     awful.key({modkey,            }, "f",   function () awful.util.spawn(filemanager) end, "File manager"),
+    awful.key({modkey,  "Shift"   }, "c", function () awful.util.spawn('catia') end, "Jack patchbay"),
 
     -- Standard program
     keydoc.group("Awesome"),
