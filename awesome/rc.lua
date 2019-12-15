@@ -98,7 +98,7 @@ launcher = awful.widget.launcher({image = beautiful.awesome_icon, menu = main_me
 --
 autorunApps = {
     "cadence",
-    "owncloud",
+    "nextcloud",
     "ibus-daemon --xim -d"
 }
 
@@ -421,6 +421,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
 
+    -- Password menu
+    awful.key({ modkey,           }, "p", function () awful.util.spawn('passmenu') end, "pass-clip"),
 
     -- show launcher menu
     awful.key({modkey,            }, "`",   function () main_menu:show() end, "Show launcher menu"),
@@ -428,13 +430,15 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end, "Start prompt"),
 
-    awful.key({ modkey, "Shift" }, "r",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end, "Lua prompt"),
+
+    awful.key({ modkey, "Shift"},            "r",     function () awful.util.spawn('rofi -combi-modi drun -show drun') end, "Start prompt"),
+    -- awful.key({ modkey, "Shift" }, "r",
+    --           function ()
+    --               awful.prompt.run({ prompt = "Run Lua code: " },
+    --               mypromptbox[mouse.screen].widget,
+    --               awful.util.eval, nil,
+    --               awful.util.getdir("cache") .. "/history_eval")
+    --           end, "Lua prompt"),
 	  awful.key({ modkey, }, "F1", keydoc.display)
 )
 
