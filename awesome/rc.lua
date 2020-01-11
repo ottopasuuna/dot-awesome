@@ -208,7 +208,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             widgets.weather,
-            widgets.imap,
+            -- widgets.imap,
             widgets.alsa,
             widgets.battery,
             lain.widget.mpd(),
