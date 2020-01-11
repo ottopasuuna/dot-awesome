@@ -211,6 +211,7 @@ awful.screen.connect_for_each_screen(function(s)
             widgets.imap,
             widgets.alsa,
             widgets.battery,
+            lain.widget.mpd(),
             -- batterywidget,
             widgets.clock,
             s.mylayoutbox
