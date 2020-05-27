@@ -312,7 +312,27 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey, "Shift" },            "r",     function () awful.screen.focused().mypromptbox:run() end, "Start prompt"),
 
-	  awful.key({ modkey, }, "F1", keydoc.display)
+	  awful.key({ modkey, }, "F1", keydoc.display),
+
+    -- Volume Control
+    -- Not covered by sxhkd as we want to integrate with volume widget
+    keydoc.group("Music/Audio"),
+    awful.key({}, "XF86AudioRaiseVolume",
+        function ()
+            os.execute(string.format("amixer set %s 1%%+", volume.channel))
+            volume.notify()
+        end, "Raise volume"),
+    awful.key({}, "XF86AudioLowerVolume",
+        function ()
+            os.execute(string.format("amixer set %s 1%%-", volume.channel))
+            volume.notify()
+        end, "Lower volume"),
+    awful.key({}, "XF86AudioMute",
+        function ()
+            os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
+            volume.notify()
+        end, "Mute")
+
 )
 
 -- Client bindings
