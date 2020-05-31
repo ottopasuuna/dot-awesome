@@ -4,3 +4,6 @@
 [submodule "awesome/radical"]
 	path = awesome/radical
 	url = git@github.com:Elv13/radical.git
+[submodule "awesome-copycats"]
+	path = awesome-copycats
+	url = git@github.com:ottopasuuna/awesome-copycats.git
