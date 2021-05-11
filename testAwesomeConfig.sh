@@ -1,7 +1,7 @@
 #! /bin/bash
 
 if [ -z $1 ]; then
-    config_file=~/..config/awesome/rc.lua
+    config_file=~/.config/awesome/rc.lua
 else
     config_file=$1
 fi
