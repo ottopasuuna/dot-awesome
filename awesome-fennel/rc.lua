@@ -187,27 +187,27 @@ lain.layout.cascade.tile.ncol          = 2
 
 -- {{{ Menu
 
-local awesome_menu = {
-    { "Hotkeys", function() return false, hotkeys_popup.show_help end },
-    { "Manual", terminal .. " -e man awesome" },
-    { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-    { "Restart", awesome.restart },
-    { "Quit", function() awesome.quit() end }
-}
-
-local system_menu = {
-    {"Suspend", "systemctl suspend"},
-    {"Reboot", "reboot"},
-    {"Shut down", "systemctl poweroff"}
-}
-
-awful.util.mainmenu = awful.menu.new({
-    items = {
-        {"Awesome", awesome_menu},
-        {"System", system_menu},
-        {"Sleep", "systemctl suspend"}
-    }
-})
+-- local awesome_menu = {
+--     { "Hotkeys", function() return false, hotkeys_popup.show_help end },
+--     { "Manual", terminal .. " -e man awesome" },
+--     { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+--     { "Restart", awesome.restart },
+--     { "Quit", function() awesome.quit() end }
+-- }
+--
+-- local system_menu = {
+--     {"Suspend", "systemctl suspend"},
+--     {"Reboot", "reboot"},
+--     {"Shut down", "systemctl poweroff"}
+-- }
+--
+-- awful.util.mainmenu = awful.menu.new({
+--     items = {
+--         {"Awesome", awesome_menu},
+--         {"System", system_menu},
+--         {"Sleep", "systemctl suspend"}
+--     }
+-- })
 
 -- hide menu when mouse leaves it
 --awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function() awful.util.mymainmenu:hide() end)
