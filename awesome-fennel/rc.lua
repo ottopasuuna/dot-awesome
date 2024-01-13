@@ -245,11 +245,11 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(my_table.join(
-    awful.button({ }, 3, function () awful.util.mainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
+-- root.buttons(my_table.join(
+--     awful.button({ }, 3, function () awful.util.mainmenu:toggle() end),
+--     awful.button({ }, 4, awful.tag.viewnext),
+--     awful.button({ }, 5, awful.tag.viewprev)
+-- ))
 -- }}}
 
 -- {{{ Key bindings

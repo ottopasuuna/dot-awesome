@@ -5,6 +5,7 @@
 (local user_vars (require :user_vars))
 (local menu (require :menu))
 (local tags (require :tags))
+(local bindings (require :bindings))
 
 
 (tset awful :util :terminal user_vars.terminal)
