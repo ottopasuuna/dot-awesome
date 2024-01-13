@@ -4,11 +4,11 @@
 (local error_handling (require "error_handling"))
 (local user_vars (require :user_vars))
 (local menu (require :menu))
-
+(local tags (require :tags))
 
 
 (tset awful :util :terminal user_vars.terminal)
-(tset awful :util :tagnames ["1" "2" "3" "4" "5" "6" "7" "8" "9"])
+
 (tset awful :layout :layouts
       [awful.layout.suit.tile
        awful.layout.suit.tile.left
