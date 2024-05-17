@@ -6,6 +6,7 @@
 (local altkey "Mod1")
 (local chosen_theme "ottopasuuna")
 (local cycle-prev true)
+(local enable_client_titlebars false)
 
 {: terminal
  : editor
@@ -13,4 +14,5 @@
  : modkey
  : altkey
  : chosen_theme
- : cycle-prev}
+ : cycle-prev
+ : enable_client_titlebars}

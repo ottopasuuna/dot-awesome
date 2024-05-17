@@ -7,6 +7,7 @@
 (local tags (require :tags))
 (local bindings (require :bindings))
 (local signals (require :signals))
+(local rules   (require :rules))
 
 
 (tset awful :util :terminal user_vars.terminal)
