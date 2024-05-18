@@ -20,7 +20,10 @@
        awful.layout.suit.floating])
 
 (beautiful.init
-  (string.format "%s/.config/awesome/themes/%s/theme.lua"
-                 (os.getenv "HOME")
-                 user_vars.chosen_theme))
+  (string.format
+    "%s/.config/awesome/themes/%s/theme.lua"
+    (os.getenv "HOME")
+    user_vars.chosen_theme))
 
+(awful.screen.connect_for_each_screen
+  (fn [s] (beautiful.at_screen_connect s)))

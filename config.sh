@@ -1,5 +1,5 @@
 description="Configuration for the Awesome window manager"
 
 link_map=(
-    [awesome-copycats]=$HOME/.config/awesome
+    [awesome-fennel]=$HOME/.config/awesome
 )

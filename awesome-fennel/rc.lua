@@ -23,7 +23,9 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
 local fennel = require("fennel")
-fennel.install().dofile("config.fnl")
+fennel.path = fennel.path .. ";/home/carl/.config/awesome/?.fnl"
+fennel.install().dofile("/home/carl/.config/awesome/config.fnl")
+-- fennel.install().dofile("config.fnl")
 -- }}}
 
 -- {{{ Error handling
@@ -241,7 +243,7 @@ screen.connect_signal("arrange", function (s)
     end
 end)
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
+-- awful.screen.connect_for_each_screen(function(s) beautiful.get().at_screen_connect(s) end)
 -- }}}
 
 -- {{{ Mouse bindings

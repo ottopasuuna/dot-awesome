@@ -125,7 +125,7 @@ local markup = lain.util.markup
 local separators = lain.util.separators
 
 -- Binary clock
-local binclock = require("themes.powerarrow.binclock"){
+local binclock = require("themes.ottopasuuna.binclock"){
     height = dpi(32),
     show_seconds = true,
     color_active = theme.fg_normal,
