@@ -13,6 +13,15 @@
 
 (local dpi (. (require :beautiful.xresources) :apply_dpi))
 
+(fn run-once [cmd-arr]
+  (each [_ cmd (ipairs cmd-arr)]
+    (awful.spawn.with_shell (string.format "pgrep -u $USER -fx '%s' > /dev/null || (%s)"
+                                           cmd cmd))))
+(local autorun-apps
+  ["ibus-daemon --xim -d"
+   "dex -a"])
+(run-once autorun-apps)
+
 (tset awful :util :terminal user_vars.terminal)
 
 (tset awful :layout :layouts
