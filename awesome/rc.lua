@@ -22,6 +22,16 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
+
+
+-- {{{ Lua/Fennel Workarounds
+
+local chosen_theme = "ottopasuuna"
+local terminal     = "alacritty"
+awful.util.terminal = terminal
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+-- }}}
+
 local fennel = require("fennel")
 fennel.path = fennel.path .. ";/home/carl/.config/awesome/?.fnl"
 fennel.install().dofile("/home/carl/.config/awesome/config.fnl")
