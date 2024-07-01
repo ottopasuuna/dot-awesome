@@ -7,6 +7,13 @@
 
 (local rules
   [
+   {:rule {:class "floating-centered"}
+    :properties {:floating true
+                 :width 800
+                 :height 600
+                 :placement (+ awful.placement.no_overlap
+                               awful.placement.no_offscreen
+                               awful.placement.centered)}}
    ;; All clients will match this rule
    {:rule []
     :properties {:border_width beautiful.border_width

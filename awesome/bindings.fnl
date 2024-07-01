@@ -286,23 +286,23 @@
 (awful.key [user_vars.modkey] :y
            (fn []
              (awful.spawn (.. user_vars.terminal
-                              " -e \"ytfzf -t\"")
+                              " --class floating-centered -e ytfzf -t")
                           {:floating true
                            :placement awful.placement.centered}))
            {:description "Launch youtube-fzf"
             :group :launcher})
 (awful.key [user_vars.modkey] :p
            (fn []
-             (awful.spawn (.. user_vars.terminal
-                              " -e \"fzflaunch pass\"")
+             (awful.spawn (..  user_vars.terminal
+                              " --class floating-centered -e fzflaunch pass")
                           {:floating true
-                           :placement awful.placement.centered}))
+                           :placement awful.placement.centered }))
            {:description "Password manager"
             :group :launcher})
 (awful.key [user_vars.modkey] :r
            (fn []
              (awful.spawn (.. user_vars.terminal
-                              " -e \"fzflaunch run\"")
+                              " --class floating-centered -e fzflaunch run")
                           {:floating true
                            :placement awful.placement.centered}))
            {:description "Application launcher"

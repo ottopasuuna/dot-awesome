@@ -1,6 +1,6 @@
 
-(local terminal "termite")
-(local editor (or (os.getenv "EDITOR") "nano"))
+(local terminal "kitty")
+(local editor (or (os.getenv "EDITOR") "vi"))
 (local editor_cmd (.. terminal " -e " editor))
 (local modkey "Mod4")
 (local altkey "Mod1")
